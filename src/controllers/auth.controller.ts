@@ -25,7 +25,7 @@ export const login = async (req: Request, res: Response) => {
 export const allUsers = async (req: Request, res: Response) => {
     try {
         const users = await listAllUsers()
-        res.json(users)
+        res.json({ ok: true, data: users})
     } catch (error) {
         res.status(500).json({ message: (error as Error).message })
     }
