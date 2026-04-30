@@ -29,8 +29,8 @@ src/
 │   └── auth.service.ts
 ├── routes/
 │   └── auth.routes.ts
-└── prisma/
-    └── schema.prisma
+└── lib/
+    └── prisma.ts
 ```
 
 ## Instalação
