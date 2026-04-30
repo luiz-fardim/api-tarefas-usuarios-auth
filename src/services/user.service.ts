@@ -77,4 +77,22 @@ export const listOneUser = async (id: string) => {
     return user
 }
 
+export const updateUser = async (id: string, data: Partial<{ email: string; password: string}>) => {
+    const user = await prisma.user.update({
+        where: { id },
+        data,
+    })
+    return user
+}
+
+export const deleteUser = async (id: string) => {
+    const user = await prisma.user.delete({
+        where: {
+            id
+        }
+    }) 
+    return user
+}
+
 console.log('auth ativa')
+
