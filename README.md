@@ -18,19 +18,25 @@ API REST de autenticação e gerenciamento de usuários construída com Node.js,
 - Senhas criptografadas com bcrypt
 - Listagem de todos os usuários
 - Busca de usuário por ID
+- Adicionar, alterar, remover e ler tarefas.
+  
 
 ## Estrutura do Projeto
 
 ```
 src/
 ├── controllers/
-│   └── auth.controller.ts
+│   └── user.controller.ts
+│   └── task.service.ts
 ├── services/
-│   └── auth.service.ts
+│   └── user.service.ts
+│   └── task.service.ts
 ├── routes/
-│   └── auth.routes.ts
+│   └── user.routes.ts
+│   └── task.service.ts
 └── lib/
     └── prisma.ts
+
 ```
 
 ## Instalação
