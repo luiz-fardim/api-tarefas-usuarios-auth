@@ -27,13 +27,13 @@ API REST de autenticação e gerenciamento de usuários construída com Node.js,
 src/
 ├── controllers/
 │   └── user.controller.ts
-│   └── task.service.ts
+│   └── task.controller.ts
 ├── services/
 │   └── user.service.ts
 │   └── task.service.ts
 ├── routes/
 │   └── user.routes.ts
-│   └── task.service.ts
+│   └── task.routes.ts
 └── lib/
     └── prisma.ts
 
