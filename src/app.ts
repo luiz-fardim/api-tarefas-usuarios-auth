@@ -16,5 +16,3 @@ app.use('/', userRoutes)
 app.use('/', taskRoutes)
 
 export default app
-
-console.log('app conectado')

@@ -79,14 +79,34 @@ export const listOneUser = async (id: string) => {
 }
 
 export const updateUser = async (id: string, data: Partial<{ email: string; password: string}>) => {
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            id
+        }
+    })
+
+    if (existingUser) {
+        throw new Error('User not found')
+    }
+    
     const user = await prisma.user.update({
         where: { id },
-        data,
+        data: { email: data.email }
     })
     return user
 }
 
 export const deleteUser = async (id: string) => {
+    const existingUser = await prisma.user.findUnique({
+        where: {
+            id
+        }
+    })
+
+    if (existingUser) {
+        throw new Error('User not found')
+    }
+
     const user = await prisma.user.delete({
         where: {
             id
@@ -95,5 +115,4 @@ export const deleteUser = async (id: string) => {
     return user
 }
 
-console.log('auth ativa')
 
