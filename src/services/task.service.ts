@@ -2,7 +2,7 @@ import prisma from '../lib/prisma.js'
 
 export const createTaskService = async (title: string, userId: string) => {
     if (!title?.trim()) {
-        throw new Error('Título é obrigatório')
+        throw new Error('Title is required')
     }
 
     const task = await prisma.task.create({
@@ -16,14 +16,14 @@ export const createTaskService = async (title: string, userId: string) => {
 
 export const updateTaskService = async (title: string, taskId: string) => {
     if (!title.trim()) {
-        throw new Error('Titulo é obrigatório')
+        throw new Error('Title is required')
     }
     if (!taskId) {
-        throw new Error('Identificador é obrigatório para a alteração da tarefa')
+        throw new Error('The identifier is required for change')
     }
     const task = await prisma.task.update({
-        where: { id: taskId},
-        data: { title: title}
+        where: { id: taskId },
+        data: { title: title }
     })
     return task
 }
@@ -40,6 +40,18 @@ export const getOneTaskService = async (taskId: string) => {
         },
         select: {
             title: true
+        }
+    })
+    return task
+}
+
+export const deleteTaskService = async (taskId: string) => {
+    if (!taskId) {
+        throw new Error('The identifier is required for deletion')
+    }
+    const task = await prisma.task.delete({
+        where: {
+            id: taskId
         }
     })
     return task

@@ -25,6 +25,10 @@ export const registerUser = async (name: string, email: string, password: string
 }
 
 export const loginUser = async (email: string, password: string) => {
+    if (!email || !password) {
+        throw new Error('Email and password are required')
+    }
+
     const user = await prisma.user.findUnique({
         where: {
             email
@@ -33,6 +37,10 @@ export const loginUser = async (email: string, password: string) => {
 
     if (!user) {
         throw new Error('Invalid credentials')
+    }
+
+    if (!user.password) {
+        throw new Error('User password is not properly configured')
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password)
@@ -78,20 +86,30 @@ export const listOneUser = async (id: string) => {
     return user
 }
 
-export const updateUser = async (id: string, data: Partial<{ email: string; password: string}>) => {
+export const updateUser = async (id: string, data: Partial<{ email: string; password: string }>) => {
     const existingUser = await prisma.user.findUnique({
         where: {
             id
         }
     })
 
-    if (existingUser) {
+    if (!existingUser) {
         throw new Error('User not found')
     }
-    
+
+    const updateData: Partial<{ email: string; password: string }> = {};
+    if (data.email) updateData.email = data.email;
+    if (data.password) updateData.password = await bcrypt.hash(data.password, 10);
+
     const user = await prisma.user.update({
         where: { id },
-        data: { email: data.email }
+        data: updateData,
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            createdAt: true
+        }
     })
     return user
 }
@@ -103,7 +121,7 @@ export const deleteUser = async (id: string) => {
         }
     })
 
-    if (existingUser) {
+    if (!existingUser) {
         throw new Error('User not found')
     }
 
@@ -111,7 +129,7 @@ export const deleteUser = async (id: string) => {
         where: {
             id
         }
-    }) 
+    })
     return user
 }
 
