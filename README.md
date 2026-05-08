@@ -5,11 +5,11 @@ API REST de autenticação e gerenciamento de usuários construída com Node.js,
 ## Tecnologias
 
 - **Node.js** + **TypeScript**
-- **Express** — framework HTTP
-- **MySQL** — banco de dados relacional
-- **Prisma ORM** — acesso ao banco de dados
-- **bcrypt** — criptografia de senhas
-- **JWT** — autenticação via token
+- **Express** | framework HTTP
+- **MySQL** | banco de dados relacional
+- **Prisma ORM** | acesso ao banco de dados
+- **bcrypt** | criptografia de senhas
+- **JWT** | autenticação via token
 
 ## Funcionalidades
 
@@ -25,6 +25,8 @@ API REST de autenticação e gerenciamento de usuários construída com Node.js,
 
 ```
 src/
+├── middlewares/
+│   └── user.auth.middleware.ts
 ├── controllers/
 │   └── user.controller.ts
 │   └── task.controller.ts
@@ -72,21 +74,35 @@ PORT=3000
 ## Endpoints
 
 ### Autenticação
-
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `POST` | `/register` | Cadastra um usuário |
+| `POST` | `/register` | Cadastra um novo usuário |
 | `POST` | `/login` | Realiza login e retorna token JWT |
 
 ### Usuários
+| Método | Rota | Descrição | Auth |
+|--------|------|-----------|------|
+| `GET` | `/users` | Lista todos os usuários | ❌ |
+| `GET` | `/users/:id` | Busca usuário por ID | ❌ |
+| `PATCH` | `/users/:id` | Atualiza dados do usuário | ❌ |
+| `DELETE` | `/users/:id` | Remove um usuário | ❌ |
+
+### Tarefas 🔒
+> Todos os endpoints de tarefas exigem token JWT no header.
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| `GET` | `/users` | Lista todos os usuários |
-| `GET` | `/users/:id` | Busca usuário por ID |
+| `GET` | `/tasks` | Lista todas as tarefas |
+| `GET` | `/getOneTask/:taskId` | Busca tarefa por ID |
+| `POST` | `/registerTask` | Cria uma nova tarefa |
+| `PUT` | `/updateTask/:taskId` | Atualiza uma tarefa |
+| `DELETE` | `/deleteTask/:taskId` | Remove uma tarefa |
+
+---
 
 ## Exemplos de Requisição
 
+### Cadastro
 ```http
 POST /register
 Content-Type: application/json
@@ -99,7 +115,6 @@ Content-Type: application/json
 ```
 
 ### Login
-
 ```http
 POST /login
 Content-Type: application/json
@@ -117,6 +132,11 @@ Content-Type: application/json
 }
 ```
 
+### Rotas protegidas (tarefas)
+```http
+GET /tasks
+Authorization: Bearer <seu_token_jwt>
+```
 ## Scripts
 
 ```bash
