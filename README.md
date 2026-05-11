@@ -52,7 +52,7 @@ cd seu-repo
 npm install
 
 # Configure as variáveis de ambiente
-cp .env.example .env
+cp .env.example .env  
 
 # Execute as migrations do banco
 npx prisma migrate dev
