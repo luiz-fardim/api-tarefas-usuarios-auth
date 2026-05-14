@@ -10,6 +10,9 @@ API REST de autenticação e gerenciamento de usuários construída com Node.js,
 - **Prisma ORM** | acesso ao banco de dados
 - **bcrypt** | criptografia de senhas
 - **JWT** | autenticação via token
+- **CORS** | proteção contra acessos não autorizados entre diferentes origens
+- **rate limit** | limitar tráfego de rede
+- **helmet** | implementação de cabeçalhos para uma segurança reforçada
 
 ## Funcionalidades
 
