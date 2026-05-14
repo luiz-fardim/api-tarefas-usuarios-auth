@@ -158,7 +158,3 @@ Coisas que quero implementar quando retomar o projeto:
 
 ---
 
-## Contato
-
-- LinkedIn: [seu LinkedIn aqui]
-- GitHub: [seu GitHub aqui]
