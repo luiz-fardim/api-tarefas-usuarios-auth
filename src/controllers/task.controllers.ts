@@ -14,7 +14,7 @@ export const createTaskController = async (req: Request, res: Response) => {
     }
 }
 
-export const updateTasksController = async (req: Request, res: Response) => {
+export const updateTaskController = async (req: Request, res: Response) => {
     const { taskId } = req.params as { taskId: string }
     const { title } = req.body
     try {

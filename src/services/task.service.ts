@@ -14,12 +14,12 @@ export const createTaskService = async (title: string, userId: string) => {
     return task
 }
 
-export const updateTaskService = async (title: string, taskId: string) => {
-    if (!title.trim()) {
-        throw new Error('Title is required')
-    }
+export const updateTaskService = async (taskId: string, title: string) => {
     if (!taskId) {
         throw new Error('The identifier is required for change')
+    }
+    if (!title.trim()) {
+        throw new Error('Title is required')
     }
     const task = await prisma.task.update({
         where: { id: taskId },
